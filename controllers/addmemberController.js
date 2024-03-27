@@ -29,21 +29,20 @@ exports.addMember = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.getMembersByMembershipId = async (req, res) => {
     try {
-      const { membershipId } = req.params;
-      const members = await AddMember.find({ membershipId });
-  
-      if (members.length === 0) {
-        return res.status(404).json({ message: "No members found with the provided membershipId" });
-      }
-  
-      res.status(200).json({ data: members });
+        const { membershipId } = req.params;
+        const members = await AddMember.find({ membershipId }).populate("memberId");
+
+        if (members.length === 0) {
+            return res.status(404).json({ message: "No members found with the provided membershipId" });
+        }
+
+        res.status(200).json({ data: members });
     } catch (error) {
-      res.status(500).json({ error: error.message });
+        res.status(500).json({ error: error.message });
     }
-  };
+};
 exports.getAllMembers = async (req, res) => {
   try {
     const members = await AddMember.find();
@@ -52,7 +51,6 @@ exports.getAllMembers = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.getMemberById = async (req, res) => {
   try {
     const member = await AddMember.findById(req.params.id);
@@ -64,7 +62,6 @@ exports.getMemberById = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.updateMember = async (req, res) => {
   try {
     const { firstname, lastname, email, gender, membershipId, memberId } =
@@ -88,7 +85,6 @@ exports.updateMember = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
-
 exports.deleteMember = async (req, res) => {
   try {
     const deletedMember = await AddMember.findByIdAndDelete(req.params.id);

@@ -23,7 +23,6 @@ const memberController = {
     }
   },
 
-
   getMemberById: async (req, res) => {
     try {
       const member = await Member.findById(req.params.id);
@@ -56,7 +55,6 @@ const memberController = {
     }
   },
 
-  
   deleteMemberById: async (req, res) => {
     try {
       const deletedMember = await Member.findByIdAndDelete(req.params.id);

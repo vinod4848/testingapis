@@ -20,5 +20,5 @@ const MemberSchema = new mongoose.Schema({
 
 const Member = mongoose.model("Member", MemberSchema);
 
-module.exports = Member;
+module.exports = { Member };
 
